@@ -5,12 +5,40 @@ Is TIC 219893931 really an extremely metal-poor planet host?
 The NASA Exoplanet Archive lists **TIC 219893931 b** (TESS, P = 6.41 d,
 R = 2.9 R⊕) with a host metallicity of **[Fe/H] = −2.83 ± 0.23**, from
 Hotnisky et al. 2026 (ApJS 286, 42). That would make it one of the most
-metal-poor planet hosts known. This repo runs three independent checks
-on that number using public data for the host, Gaia DR3 1651056179580039424.
+metal-poor planet hosts known. This repo checks that number against public
+data for the host, Gaia DR3 1651056179580039424, in four ways: kinematics,
+catalogue metallicities, the Gaia XP spectrum, and binarity.
 
-**Verdict: the −2.83 value is almost certainly wrong.** All three checks point
+**Verdict: the −2.83 value is almost certainly wrong.** Every check points
 to an ordinary, single, near-solar-metallicity F/G dwarf
 ([M/H] ≈ −0.4 to +0.3) with disk kinematics.
+
+## Where −2.83 comes from
+
+Section 2.2 of the paper (arXiv:2606.13789) derives [Fe/H] for all 383,718
+northern-CVZ stars with a random-forest regression. It is trained on Gaia and
+2MASS colours, extinction-corrected with Bayestar19, plus 2MASS absolute
+magnitudes, with labels from 9,043 LAMOST DR11 stars. Every star in their
+Table 1 carries the same ±0.233 dex error, which matches the archive entry.
+The paper's Table 2 does not print [Fe/H], so the number comes from the
+machine-readable Table 1.
+
+That method should not be able to produce −2.83 for this star:
+
+- A random forest predicts averages of training labels, so it cannot go
+  below the lowest label it saw. Stars near −2.8 are extremely rare among
+  9,043 LAMOST stars.
+- The inputs are clean. 2MASS has quality flags AAA and J − Ks = 0.35,
+  normal for a ~6000 K dwarf, and SFD/S&F reddening is only
+  E(B−V) = 0.03.
+- The paper's own M★ = 1.14 M☉ and R★ = 1.28 R☉ for this star come from
+  T_eff and L, not [Fe/H], so they were not affected. Those values describe a
+  roughly solar-metallicity dwarf.
+
+The most likely explanation is a bad row in the machine-readable table, or a
+mistake when the archive ingested it. A sign or column slip is possible. A
+draft report to the archive, copying the corresponding author, is in
+[`report/email_to_archive.md`](report/email_to_archive.md).
 
 ![Toomre diagram](figures/toomre.png)
 
@@ -62,18 +90,42 @@ CaHK-band synthesis, also lands between −0.4 and +0.1.
 
 LAMOST has not observed the star. The cone searches return nothing in
 DR8–DR11, although a control field in the Kepler region returns 48 spectra
-from the same service. A low-resolution spectrum would still be the cleanest
-independent check. A single LAMOST/SDSS-quality spectrum, or a 1–2 m telescope
-spectrum of the Ca II H&K and Mg b regions, would decide it immediately.
+from the same service. Section 3 uses the Gaia XP spectrum instead.
 
 There is also an internal consistency problem: the same archive entry gives
 M★ = 1.14 M☉ and R★ = 1.28 R☉ at T_eff = 5956 K. A star with [Fe/H] = −2.8 at
 that temperature is an old turn-off star of ~0.8 M☉. The quoted mass and
-radius fit a roughly solar-metallicity F8–G0 dwarf. The −2.83 value looks
-like a pipeline or transcription error, possibly a sign error or a column
-taken from the wrong place, rather than a measurement.
+radius fit a roughly solar-metallicity F8–G0 dwarf. See
+[Where −2.83 comes from](#where-283-comes-from) above.
 
-## 3. Binarity (Gaia RUWE and non-single-star flags)
+## 3. The spectrum: Gaia DR3 XP
+
+LAMOST has no spectrum, but Gaia DR3 does have a low-resolution BP/RP (XP)
+spectrum of the star, covering 336–1020 nm. Metal lines blanket the blue, so
+at a fixed temperature a very metal-poor dwarf is markedly brighter below
+450 nm. `xp_spectrum.py` compares the dereddened target spectrum with XP
+spectra of benchmark stars whose metallicities come from high-resolution
+spectroscopy, from solar twins down to G 64-12 at [Fe/H] ≈ −3.2.
+
+![XP spectrum comparison](figures/xp_spectrum.png)
+
+- The very metal-poor benchmarks (HD 84937, HD 74000, BD−13 3442, G 64-12)
+  have the same red-colour temperature index as the target. They need no
+  extrapolation, and all sit at blanketing index 1.18–1.22. The target sits
+  at **0.92**, below even HD 209458 ([Fe/H] = 0.00).
+- A linear fit (blanketing ∝ T index + [Fe/H]) over the 11 benchmarks
+  predicts 1.24 for a [Fe/H] = −2.83 star at the target's temperature. The
+  target is 0.31 below that, **6.5× the benchmark scatter** (rms 0.048).
+- Inverting the fit gives [Fe/H] ≈ +0.5 (−0.2 to +1.1). The point estimate
+  is crude: the solar benchmarks are cooler, so solar metallicity is
+  extrapolated. It is consistent with solar and firmly excludes the
+  metal-poor regime.
+
+Three planned benchmarks (BD+17 4708, HD 19445, HD 140283) have no published
+XP sampled spectrum and are skipped. The benchmark [Fe/H] and T_eff values
+are approximate literature values, good to ~0.1 dex and ~100 K.
+
+## 4. Binarity (Gaia RUWE and non-single-star flags)
 
 | diagnostic | value | reading |
 |---|---|---|
@@ -96,14 +148,17 @@ photometric metallicities are not the problem, since they are near solar.
 pip install -r requirements.txt
 python fetch_data.py   # queries MAST, Gaia archive, LAMOST, NASA Exoplanet Archive, VizieR
 python analyze.py      # writes results.json and figures/toomre.png
+python xp_spectrum.py  # writes results_xp.json and figures/xp_spectrum.png
 ```
 
-The cached query results are committed in `data/`, so `analyze.py` runs offline.
+The cached query results are committed in `data/`, so both analysis scripts run offline.
 Kinematics use the Gaia astrometric covariance and RV error (20 000 Monte Carlo
 draws), solar motion (11.1, 12.24, 7.25) km/s (Schönrich et al. 2010) and
 V_LSR = 233.4 km/s.
 
 ## Suggested next step
 
-Report the discrepancy to the NASA Exoplanet Archive and the Hotnisky et al.
-authors, and get one low-resolution optical spectrum.
+Send the report in [`report/`](report/email_to_archive.md) to the NASA
+Exoplanet Archive helpdesk, copying the corresponding author. A ground-based
+spectrum of the Ca II H&K and Mg b regions would add a high-resolution
+confirmation, but the existing Gaia data already rule out −2.83.
