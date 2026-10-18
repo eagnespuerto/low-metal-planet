@@ -1,0 +1,110 @@
+{
+  "kinematics": {
+    "distance_pc": {
+      "median": 404.57,
+      "minus": 1.82,
+      "plus": 1.81
+    },
+    "v_tan_km_s": {
+      "median": 31.7,
+      "minus": 0.15,
+      "plus": 0.15
+    },
+    "rv_km_s": {
+      "median": -72.94,
+      "minus": 0.74,
+      "plus": 0.74
+    },
+    "U_lsr": {
+      "median": 21.84,
+      "minus": 0.14,
+      "plus": 0.14
+    },
+    "V_lsr": {
+      "median": -31.56,
+      "minus": 0.62,
+      "plus": 0.61
+    },
+    "W_lsr": {
+      "median": -58.26,
+      "minus": 0.41,
+      "plus": 0.41
+    },
+    "v_total_lsr": {
+      "median": 69.76,
+      "minus": 0.65,
+      "plus": 0.65
+    },
+    "v_total_heliocentric": {
+      "median": 79.53,
+      "minus": 0.69,
+      "plus": 0.68
+    },
+    "z_pc": {
+      "median": 235.21,
+      "minus": 0.96,
+      "plus": 0.96
+    },
+    "P(v_lsr > 180 km/s)": 0.0,
+    "P(v_lsr > 70 km/s)": 0.35715
+  },
+  "metallicity": {
+    "claimed": {
+      "value": -2.83,
+      "err": 0.233,
+      "ref": "Hotnisky et al. 2026 (ApJS 286, 42) via NASA Exoplanet Archive",
+      "claimed_mass_msun": 1.14
+    },
+    "gaia_mh_gspspec": {
+      "value": 0.28,
+      "lower": 0.21,
+      "upper": 0.41,
+      "teff": 6371.0,
+      "logg": 4.26,
+      "flags": "00000010000009999999999999999999999999999"
+    },
+    "gaia_mh_gspphot": {
+      "value": -0.2876,
+      "lower": -0.293,
+      "upper": -0.2813
+    },
+    "gaia_mh_msc": 0.0809596,
+    "gaia_rv_template_fe_h": -0.5,
+    "independent_catalogues": {
+      "I/355/paramsup": -0.3700000047683716,
+      "I/354/starhorse2021": -0.404592,
+      "J/MNRAS/524/1855/xpparams": -0.0169,
+      "J/A+A/692/A115/pristine_gaia": -0.20000000298023224,
+      "J/A+A/692/A150/allskytg": -0.08900000154972076,
+      "J/ApJ/984/58/table1": -0.20000000298023224,
+      "J/A+A/685/A59/catalog": 0.08399999886751175,
+      "J/MNRAS/551/G1593/table1": 0.25
+    },
+    "lamost_spectra": {
+      "dr11/v1.0": 0,
+      "dr10/v2.0": 0,
+      "dr9/v2.0": 0,
+      "dr8/v2.0": 0
+    }
+  },
+  "binarity": {
+    "ruwe": 1.0588293,
+    "ruwe_ok": true,
+    "non_single_star": 0,
+    "nss_table_matches": {
+      "nss_two_body_orbit": 0,
+      "nss_acceleration_astro": 0,
+      "nss_non_linear_spectro": 0,
+      "nss_vim_fl": 0
+    },
+    "ipd_frac_multi_peak": 1,
+    "ipd_gof_harmonic_amplitude": 0.014529849,
+    "duplicated_source": false,
+    "rv_nb_transits": 21,
+    "rv_chisq_pvalue": 0.45663068,
+    "rv_renormalised_gof": 0.12900214,
+    "rv_amplitude_robust": 10.250107,
+    "dsc_prob_binary": 0.00032036557,
+    "phot_bp_rp_excess_factor": 1.1954898
+  }
+}

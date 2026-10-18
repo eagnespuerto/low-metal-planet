@@ -1,0 +1,34 @@
+{
+  "I/355/paramsup": {
+    "column": "[M/H]-Phx",
+    "value": -0.3700000047683716
+  },
+  "I/354/starhorse2021": {
+    "column": "met50",
+    "value": -0.404592
+  },
+  "J/MNRAS/524/1855/xpparams": {
+    "column": "[Fe/H]",
+    "value": -0.0169
+  },
+  "J/A+A/692/A115/pristine_gaia": {
+    "column": "[Fe/H]ph",
+    "value": -0.20000000298023224
+  },
+  "J/A+A/692/A150/allskytg": {
+    "column": "[Fe/H]",
+    "value": -0.08900000154972076
+  },
+  "J/ApJ/984/58/table1": {
+    "column": "[Fe/H]",
+    "value": -0.20000000298023224
+  },
+  "J/A+A/685/A59/catalog": {
+    "column": "[Fe/H]",
+    "value": 0.08399999886751175
+  },
+  "J/MNRAS/551/G1593/table1": {
+    "column": "[M/H]",
+    "value": 0.25
+  }
+}
