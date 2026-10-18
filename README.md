@@ -37,7 +37,7 @@ That method should not be able to produce −2.83 for this star:
 
 The most likely explanation is a bad row in the machine-readable table, or a
 mistake when the archive ingested it. A sign or column slip is possible. A
-draft report to the archive, copying the corresponding author, is in
+draft report to the archive is in
 [`report/email_to_archive.md`](report/email_to_archive.md).
 
 ![Toomre diagram](figures/toomre.png)
@@ -159,6 +159,6 @@ V_LSR = 233.4 km/s.
 ## Suggested next step
 
 Send the report in [`report/`](report/email_to_archive.md) to the NASA
-Exoplanet Archive helpdesk, copying the corresponding author. A ground-based
+Exoplanet Archive helpdesk. A ground-based
 spectrum of the Ca II H&K and Mg b regions would add a high-resolution
 confirmation, but the existing Gaia data already rule out −2.83.
