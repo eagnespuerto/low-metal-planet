@@ -1,0 +1,21 @@
+[
+  {
+    "pl_name": "TIC 219893931 b",
+    "default_flag": 1,
+    "pl_orbper": 6.410389,
+    "pl_rade": 2.92,
+    "pl_radeerr1": 0.37,
+    "st_teff": 5956.0,
+    "st_tefferr1": 174.0,
+    "st_logg": 4.274,
+    "st_met": -2.83,
+    "st_meterr1": 0.233,
+    "st_metratio": "[Fe/H]",
+    "st_rad": 1.284,
+    "st_mass": 1.14,
+    "sy_dist": 410.453,
+    "pl_refname": "<a refstr=HOTNISKY_ET_AL_2026 href=https://ui.adsabs.harvard.edu/abs/2026ApJS..286...42H/abstract target=ref>Hotnisky et al. 2026</a>",
+    "disc_facility": "Transiting Exoplanet Survey Satellite (TESS)",
+    "soltype": "Published Confirmed"
+  }
+]
