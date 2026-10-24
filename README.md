@@ -1,5 +1,10 @@
 # low-metal-planet
 
+[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![made with](https://img.shields.io/badge/made%20with-Python-3776AB?logo=python&logoColor=white)](https://github.com/eagnespuerto/low-metal-planet)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-support%20me-FF5E5B?logo=kofi&logoColor=white)](https://ko-fi.com/eagnespuerto)
+[![Linktree](https://img.shields.io/badge/Linktree-soitsagnes-43E55E?logo=linktree&logoColor=white)](https://linktr.ee/soitsagnes)
+
 Is TIC 219893931 really an extremely metal-poor planet host?
 
 The NASA Exoplanet Archive lists **TIC 219893931 b** (TESS, P = 6.41 d,
